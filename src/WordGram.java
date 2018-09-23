@@ -19,9 +19,7 @@ public class WordGram {
 	 */
 	public WordGram(String[] source, int start, int size) {
 		myWords = new String[size];
-		
-		for(int i = 0; i<myWords.length; i++)
-			myWords[i] = source[i];
+        System.arraycopy(source, start, myWords, 0, size);
 		
 		myToString = null;
 		myHash = 0;
@@ -55,27 +53,23 @@ public class WordGram {
 		}
 		
 		WordGram wg = (WordGram) o;
-		if(wg.length()!=myWords.length)
-			return false;
-		for(int i = 0; i<myWords.length; i++)
-			if(!myWords[i].equals(wg.wordAt(i)))
-				return false;
-				
-		return true;
+		
+		String a = toString();
+		String b = wg.toString();
+		
+		if(a.equals(b))
+			return true;
+		
+		return false;
 	}
 
 	@Override
 	public int hashCode(){
 		
-		if(myHash!=0)
-			return myHash;
-		else
-		{
 			myHash = toString().hashCode();
 			return myHash;
-		}
-			
 	}
+			
 	
 
 	/**
@@ -103,10 +97,8 @@ public class WordGram {
 		if(myToString!=null)
 			return myToString;
 		else
-		{
-			for(int i = 0; i<myWords.length; i++)
-				myToString = myToString + myWords[i] + " ";
-			return myToString;
-		}
+			myToString = String.join(" ", myWords);
+		
+		return myToString;
 	}
 }
