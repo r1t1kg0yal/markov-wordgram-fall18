@@ -114,9 +114,9 @@ public class WordGram {
 		
 		newWords[newWords.length-1] = last;
 		
-		WordGram wg = new WordGram(newWords, 0, myWords.length);
+		WordGram newOne = new WordGram(newWords, 0, myWords.length);
 		
-		return wg;
+		return newOne;
 	}
 
 	/**
