@@ -103,11 +103,15 @@ public class WordGram {
 	 * of the array set as "last"
 	 * 
 	 * @param last is last String of returned WordGram
-	 * @return array of Strings shifted
+	 * @return WordGram of Strings shifted from previous
 	 */
 	public WordGram shiftAdd(String last) {
 		
-		String [] newWords = myWords;
+		String [] newWords = new String [myWords.length];
+
+		for(int i = 0; i < newWords.length; i++)
+			newWords[i] = myWords[i];
+		
 		
 		for(int i = 1; i<newWords.length; i++)
 			newWords[i-1] = myWords[i];
