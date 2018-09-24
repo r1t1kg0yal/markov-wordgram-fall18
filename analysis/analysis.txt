@@ -1,4 +1,4 @@
-YOUR NAME and YOUR NETID
+Ritik Goyal rpg15
 
 Run WordGramDiver for wordgrams of size 2-10 and record
 the number of WordGram values/objects that occur more than
@@ -15,12 +15,13 @@ values of WSIZE
 WSIZE    # duplicates
 2        60,453
 3        10,756
-4
-5
-7
-8
-9
-10
+4		 1,987
+5		 667
+6		 362
+7		 226
+8		 151
+9		 105
+10		 73
 
 =====
 Explain in your own words the conceptual differences between 
@@ -30,10 +31,16 @@ Answer these questions:
 (1) Why the results of these methods should be the same in 
 terms of changes made to the HashSet parameter.
 
+The results of benchmark and benchmarkShift should be the same because ultimately both methods add a WordGram object wg that contains WSIZE words ranging from index “k” to index “k+WSIZE” (exclusive). The only difference lies in the method by which this WordGram object is created. The method benchmark creates these WordGram objects by iterating through the entire text file, while the method benchmarkShift creates the WordGram objects by utilizinfg the shiftAdd method passing each next word as its parameter. 
+
 (2) What are the conceptual differences between the two
-benchmarking methods
+benchmarking methods.
+
+In the method benchmark, an array “words” is created containing an ordered list of all the words in a particular text file. For each set of WSIZE words, a WordGram object is created and added to set. In the method benchmarkShift, an initial WordGram object is created consisting of the words from index 0 to WSIZE and added to the set. From there, the method shiftAdd is called and the returned WordGram is added to the set until there are no remaining words in the file. This means that in the benchmark method, the array created to store sets of words in the interim contains the entire text inputted by the scanner. However, in the benchmarkShift method, the largest size possible for the array created to store words is the value of WSIZE, which is much smaller.
 
 (3) Is the total amount of memory allocated for arrays
 the same or different in the two methods? Account for
 arrays created in the methods and arrays created by
 WordGram objects. Try to be quantitative in answering.
+
+In any random assortment of words, the memory allocated for arrays in the benchmark method will be significantly greater than for benchmarkShift. When both methods have completed, the memory allocated for the HashSet will be the same (number of unique wordgrams), meaning that the arrays created by the WordGram objects will be the same as well. However, the significant difference is that the benchmark method creates an array called “counts” that consists of every word that is to be read by Scanner, whereas benchmarkShift creates an array called “current” that only has to store each set of WSIZE words. For large text files such as entire plays or documents, this results in a large difference in memory allocated for the respective arrays, and subsequently in the time taken for the methods to complete.
